@@ -18,12 +18,13 @@ class MainQuery extends Component {
     }
 
     runQuery(query){
-        this.setQuery(query);
-        this.submitQuery();
+        this.setQuery(query, this.submitQuery.bind(this));
     }
 
-    setQuery(query){
-        this.setState({value: query});
+    setQuery(query, callback){
+        callback = callback || function(){};
+
+        this.setState({value: query}, callback);
     }
 
     submitQuery(e, query){
