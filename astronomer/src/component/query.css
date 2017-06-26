@@ -1,0 +1,25 @@
+.MainQuery {
+    background: red;
+    position: fixed;
+    height: 5vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    text-align: left;
+    z-index: 10;
+}
+    .MainQuery input{
+        font-size: 4.5vh;
+        width: calc(100% - 100px);
+        height: 5vh;
+        margin: 0;
+        padding: 0;
+    }
+    .MainQuery button{
+        width: 100px;
+        height: 5vh;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }

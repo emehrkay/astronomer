@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import reqwest from 'reqwest';
+import './query.css';
 
 
 class MainQuery extends Component {
@@ -8,14 +9,28 @@ class MainQuery extends Component {
         this.state = {value: 'g.V().hasLabel("user")'};
         this.handleChange = this.handleChange.bind(this);
         this.submitQuery = this.submitQuery.bind(this);
+
+        this.props.emitter.addListener('run_query', this.runQuery.bind(this));
     }
 
     handleChange(e){
-        this.setState({value: e.target.value });
+        this.setQuery(e.target.value);
+    }
+
+    runQuery(query){
+        this.setQuery(query);
+        this.submitQuery();
+    }
+
+    setQuery(query){
+        this.setState({value: query});
     }
 
     submitQuery(e){
-        e.preventDefault();
+        if(e){
+            e.preventDefault();
+        }
+
         let data = {'query': this.state.value}
 
         reqwest({
@@ -23,19 +38,24 @@ class MainQuery extends Component {
             method: 'post',
             data: data,
             success: function(resp) {
-                this.props.emitter.emit('new_result', resp)
+                this.props.emitter.emit('new_result', resp, this.state.value)
             }.bind(this)
         });
     }
 
     render(){
         return (
-            <form>
-                <label>
-                    <input type="text" value={ this.state.value } name="query" onChange={ this.handleChange }/>
-                </label>
-                <button type="Submit" onClick={ this.submitQuery }>Query</button>
-            </form>
+            <div className="MainQuery">
+                <form onSubmit={this.submitQuery}>
+                    <label>
+                        <input type="text"
+                            value={ this.state.value }
+                            name="query"
+                            onChange={ this.handleChange }/>
+                    </label>
+                    <button type="Submit" onClick={ this.submitQuery }>Query</button>
+                </form>
+            </div>
         )
     }
 }

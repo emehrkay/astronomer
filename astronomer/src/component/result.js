@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
+import './result.css';
 
 
 class ResultContainer extends Component{
     constructor(props){
         super(props)
-        this.state = {'view': 'table', 'result': props.result};
+        this.state = {
+            'view': 'table',
+            'result': props.result,
+            'query': props.query,
+            'setView': this.setView.bind(this)
+        };
 
         this.props.emitter.addListener('result_view_switch', this.setView.bind(this));
     }
@@ -16,9 +22,16 @@ class ResultContainer extends Component{
     }
 
     render(){
-        console.log(this.state)
-        return <li>
-            <ResultTableManager data={this.props.result} />
+        return <li className="ResultContainer">
+            <div className="result_controls">
+                <ResultControls
+                    setView={this.props.setView}
+                    query={this.props.query}
+                    emitter={this.props.emitter} />
+            </div>
+            <div className="result_container">
+                <ResultTableManager data={this.props.result} setView={this.props.setView} />
+            </div>
         </li>
     }
 }
@@ -27,10 +40,17 @@ class ResultContainer extends Component{
 class ResultControls extends Component{
     constructor(props){
         super(props)
+        this.rerunQuery = this.rerunQuery.bind(this);
+    }
+
+    rerunQuery(){
+        this.props.emitter.emit('run_query', this.props.query);
     }
 
     render(){
-        return <div className="result_controls"></div>
+        return <div className="result_controls">
+            <a href="#" onClick={this.rerunQuery}>rerun query</a>
+        </div>
     }
 }
 
@@ -74,9 +94,8 @@ class ResultTable extends Component{
     }
 
     render(){
-        console.log('RESULT TABLE', this.props.data)
         let data = this.props.data;
-        const headings = Object.keys(data[0])
+        const headings = Object.keys(data[0]['properties'])
         return <table>
             <thead>
                 <tr>

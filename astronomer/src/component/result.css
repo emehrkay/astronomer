@@ -1,0 +1,12 @@
+.ResultContainer{
+    margin: 5px 10px 15px;
+    border: 1px solid;
+    overflow: hidden;
+}
+    .ResultContainer .result_controls{
+        height: 30px;
+        background: yellow;
+    }
+    .ResultContainer .result_container{
+        overflow: auto;
+    }
