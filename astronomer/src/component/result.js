@@ -96,24 +96,26 @@ class ResultTable extends Component{
     render(){
         let data = this.props.data;
         const headings = Object.keys(data[0]['properties'])
-        return <table>
-            <thead>
-                <tr>
-                    {headings.map((head, i) =>{
-                        return <th key={i}>{head}</th>
-                    })}
-                </tr>
-            </thead>
-            <tbody>
-                {data.map((row, i) => {
-                    return <tr key={i}>
-                        { Object.values(row.properties).map((prop, x) => {
-                            return <td key={prop[0].id}>{ prop[0].value }</td>
+        return <div className="ResultTable">
+            <table>
+                <thead>
+                    <tr>
+                        {headings.map((head, i) =>{
+                            return <th key={i}>{head}</th>
                         })}
                     </tr>
-                })}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {data.map((row, i) => {
+                        return <tr key={i}>
+                            { Object.values(row.properties).map((prop, x) => {
+                                return <td key={prop[0].id}>{ prop[0].value }</td>
+                            })}
+                        </tr>
+                    })}
+                </tbody>
+            </table>
+        </div>
     }
 }
 

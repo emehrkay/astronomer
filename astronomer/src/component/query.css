@@ -1,5 +1,5 @@
 .MainQuery {
-    background: red;
+    background: #F1F4F7;
     position: fixed;
     height: 5vh;
     top: 0;
@@ -10,11 +10,15 @@
     z-index: 10;
 }
     .MainQuery input{
-        font-size: 4.5vh;
+        font-size: 3.5vh;
         width: calc(100% - 100px);
         height: 5vh;
         margin: 0;
         padding: 0;
+        border: none;
+        background-color: transparent;
+        text-indent: 1vw;
+        color: #545657;
     }
     .MainQuery button{
         width: 100px;
@@ -22,4 +26,7 @@
         position: absolute;
         top: 0;
         right: 0;
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
     }

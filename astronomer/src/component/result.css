@@ -8,5 +8,9 @@
         background: yellow;
     }
     .ResultContainer .result_container{
-        overflow: auto;
+        overflow: hidden;
     }
+
+.ResultTable{
+    overflow: auto;
+}

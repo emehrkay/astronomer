@@ -26,7 +26,7 @@ class MainQuery extends Component {
         this.setState({value: query});
     }
 
-    submitQuery(e){
+    submitQuery(e, query){
         if(e){
             e.preventDefault();
         }
@@ -53,7 +53,7 @@ class MainQuery extends Component {
                             name="query"
                             onChange={ this.handleChange }/>
                     </label>
-                    <button type="Submit" onClick={ this.submitQuery }>Query</button>
+                    <button type="Submit" onClick={ this.submitQuery }>run query</button>
                 </form>
             </div>
         )
