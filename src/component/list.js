@@ -12,14 +12,16 @@ class MainList extends Component {
     }
 
     newResult(data, query){
-        console.log('NEW RESULT', data)
         data = {
             'data': data,
-            'query': query
+            'query': query,
+            'date': (new Date()).toISOString()
         };
 
-        this.setState((prev, props) => {
-            results: prev.results.push(data);
+        this.setState(function(prev, props){
+            prev.results.push(data);
+
+            return {'results': prev.results};
         });
     }
 
@@ -27,8 +29,9 @@ class MainList extends Component {
         let results = this.state.results;
 
         return <ul className="MainList">
-            {results.map((result, i) => {
-                return <ResultContainer key={i} result={result['data']}
+            {[...results].reverse().map((result, i) => {
+                return <ResultContainer key={result['date']}
+                    result={result['data']}
                     query={result['query']}
                     emitter={this.props.emitter} />
             })}
