@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import reqwest from 'reqwest';
-import './query.css';
+import './Query.css';
+import QueryResult from '../../Result';
 
 
 class MainQuery extends Component {
@@ -39,6 +40,10 @@ class MainQuery extends Component {
             method: 'post',
             data: data,
             success: function(resp) {
+                const results = resp.map((res, i) => {
+                    return new QueryResult(res)
+                });
+
                 this.props.emitter.emit('new_result', resp, this.state.value)
             }.bind(this)
         });

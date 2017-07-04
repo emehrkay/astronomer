@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import ResultContainer from './result';
-import './list.css';
+import ResultContainer from '../Result/Result';
+import './List.css';
 
 
 class MainList extends Component {

@@ -1,0 +1,11 @@
+.ResultEditForm{
+    min-width: 500px;
+}
+    .ResultEditForm label{
+        display: block;
+    }
+.result_edit_form_entry {
+    margin: 0 0 10px;
+    padding: 0 0 10px;
+    border-bottom: 1px solid #efefef;
+}
